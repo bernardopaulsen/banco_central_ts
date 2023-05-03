@@ -53,10 +53,22 @@ def build_url(
 
 def get(
         code: int,
-        start: dt.datetime,
-        end: dt.datetime,
+        start: dt.datetime| None = None,
+        end: dt.datetime | None = None,
         last_n: int | None = None
     ) -> pd.DataFrame:
+    """Get time series data from Brazilian Central Bank.
+    
+    If `last_n` is given, the parameters `start` and `end` are ignored.
+
+    :param code: Code of time series.
+    :param start: First date.
+    :param end: Last date.
+    :param last_n: The number of observations to collect, starting from the most
+        recent.
+
+    :return: Time series.
+    """
     return pd.read_csv(
         build_url(code, start, end, last_n),
         **CSV_OPTIONS, **INDEX_OPTIONS
