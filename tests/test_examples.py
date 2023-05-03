@@ -28,6 +28,12 @@ class CsvExamplesTests(TestCase):
             index_col=0, parse_dates=True, dayfirst=True
         )
 
+    def test_0(self):
+        self._test_get_ts(
+            url='https://api.bcb.gov.br/dados/serie/bcdata.sgs.20542/dados?formato=csv',
+            code=20542
+        )
+
     def test_1(self):
         self._test_get_ts(
             url='https://api.bcb.gov.br/dados/serie/bcdata.sgs.20542/dados?formato=csv&dataInicial=01/01/2010&dataFinal=31/12/2016',
