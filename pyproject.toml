@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "banco_central_ts"
+version = "0.1.0"
+description = "Get time series data from Brazilian Central Bank."
+authors = ["Bernardo Paulsen <paulsen.bernardo@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "banco_central_ts" }]
+keywords = [
+    "Banco Central do Brasil",
+    "Sistema Gerenciador de Séries Temporais",
+    "Brazilian Central Bank",
+    "Time Series Management System",
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.urls]
+"GitHub" = "https://github.com/bernardopaulsen/banco_central_ts"
+"Documentation" = "https://bernardopaulsen.github.io/banco_central_ts/"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = 'git'
+format = '{base}'
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
