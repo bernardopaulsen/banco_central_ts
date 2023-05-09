@@ -27,7 +27,7 @@ data
 2023-05-04  0.050788
 2023-05-05  0.050788
 
->>> bacen_ts(12, start=dt.datetime(2022, 4, 28), end=dt.datetime(2023, 5, 6))
+>>> bacen_ts(12, start=dt.datetime(2022, 4, 28), end=dt.datetime(2022, 5, 6))
                valor
 data
 2022-04-28  0.043739
