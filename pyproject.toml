@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Get time series data from Brazilian Central Bank."
 authors = ["Bernardo Paulsen <paulsen.bernardo@gmail.com>"]
 license = "MIT"
-readme = "README.md"
+readme = "README.rst"
 packages = [{ include = "banco_central_ts" }]
 keywords = [
     "Banco Central do Brasil",
