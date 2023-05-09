@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to banco-central-ts’s documentation! &mdash; banco-centrl-ts 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="modules/api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            banco-centrl-ts
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">banco-centrl-ts</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to banco-central-ts’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-banco-central-ts-s-documentation">
+<h1>Welcome to banco-central-ts’s documentation!<a class="headerlink" href="#welcome-to-banco-central-ts-s-documentation" title="Permalink to this heading">¶</a></h1>
+<p>Get data from the <a class="reference external" href="https://www3.bcb.gov.br/sgspub/">Time Series Management System of the Central Bank of Brazil</a>, using its API.</p>
+<p>The Central Bank of Brazil provides an API for collecting data from its Time Series Management System.
+This library builds the necessary URL for the request and then uses a <strong>pandas</strong> function to request the data in CSV format and return a consistent time series.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
+<p>In this example, we collect data on the time series of code <strong>12</strong>, that is the time series <strong>‘Interest rate - CDI - %p.d. - daily</strong>.
+This time series is the daily <a class="reference external" href="https://pt.wikipedia.org/wiki/Certificado_de_Dep%C3%B3sito_Interbanc%C3%A1rio">interbank deposits rate</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+
+<span class="kn">from</span> <span class="nn">banco_central_ts</span> <span class="kn">import</span> <span class="n">get</span> <span class="k">as</span> <span class="n">bacen_ts</span>
+</pre></div>
+</div>
+<p>In order to collect the values of the time series for all available dates, the function is called without any arguments besides the series’ code.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdi</span> <span class="o">=</span> <span class="n">bacen_ts</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">cdi</span><span class="p">)</span>
+<span class="go">pandas.core.frame.DataFrame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdi</span>
+<span class="go">               valor</span>
+<span class="go">data</span>
+<span class="go">1986-03-06  0.068111</span>
+<span class="go">1986-03-10  0.069028</span>
+<span class="go">1986-03-12  0.067417</span>
+<span class="go">1986-03-14  0.064584</span>
+<span class="go">1986-03-17  0.068222</span>
+<span class="go">              ...</span>
+<span class="go">2023-04-28  0.050788</span>
+<span class="go">2023-05-02  0.050788</span>
+<span class="go">2023-05-03  0.050788</span>
+<span class="go">2023-05-04  0.050788</span>
+<span class="go">2023-05-05  0.050788</span>
+</pre></div>
+</div>
+<p>In order to collect the values for a specific period, the <strong>start</strong> and <strong>end</strong> parameters must be used.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bacen_ts</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="go">               valor</span>
+<span class="go">data</span>
+<span class="go">2022-04-28  0.043739</span>
+<span class="go">2022-04-29  0.043739</span>
+<span class="go">2022-05-02  0.043739</span>
+<span class="go">2022-05-03  0.043739</span>
+<span class="go">2022-05-04  0.043739</span>
+<span class="go">2022-05-05  0.047279</span>
+<span class="go">2022-05-06  0.047279</span>
+</pre></div>
+</div>
+<p>In order to collect the <em>n</em> most recent values of the time series, the <strong>last_n</strong> parameter must be used.
+Note that this parameter overwrites the <strong>start</strong> and <strong>end</strong> parameters.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bacen_ts</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">last_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">               valor</span>
+<span class="go">data</span>
+<span class="go">2023-04-28  0.050788</span>
+<span class="go">2023-05-02  0.050788</span>
+<span class="go">2023-05-03  0.050788</span>
+<span class="go">2023-05-04  0.050788</span>
+<span class="go">2023-05-05  0.050788</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/license.html">License</a></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules/api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Bernardo Paulsen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
